@@ -1,14 +1,9 @@
 import numpy as np
 import random
-<<<<<<< HEAD
 from scipy.stats import ortho_group
 import matplotlib.pyplot as plt
 from EstimateFundamentalMatrix import estimate_fundamental
 from utils.GenerateScreenPoints import generate_spiral_corn
-=======
-from EstimateFundamentalMatrix import estimate_fundamental
-from scipy.stats import ortho_group
->>>>>>> cad0cfa9ac766d70bb63c2ae6670c0ba78c610f8
 
 def generate_points(p_num):
     """
@@ -42,7 +37,7 @@ def generate_points_ortho(p_num):
     proj2 = np.concatenate((proj2[:, :2], s), axis=1)
     return proj1, proj2
 
-def ransac(proj_xy, proj_yz, repeat_num, max_point_num=8, eps=0.001):
+def get_inlier_ransac(proj_xy, proj_yz, repeat_num, max_point_num=8, eps=0.001):
     """
     args:
         proj_xy: np.array of shape (3, n)
@@ -74,7 +69,6 @@ def ransac(proj_xy, proj_yz, repeat_num, max_point_num=8, eps=0.001):
 
 
 def test():
-<<<<<<< HEAD
     def test_case():
         """
         220 samples = noise 20 + spiral 200
@@ -91,15 +85,6 @@ def test():
     scr1, scr2 = test_case()
     prov_good_indices = ransac(scr1, scr2, 10, 8, 0.01)
     print(f"Good indices are {prov_good_indices}")
-=======
-    proj_xy, proj_yz = generate_points(10)
-    proj_xy = np.concatenate((proj_xy, np.array([[1,2,1]])), axis = 0)
-    proj_yz = np.concatenate((proj_yz, np.array([[10,4,1]])), axis = 0)
-    proj_xy = np.concatenate((proj_xy, np.array([[2,2,1]])), axis = 0)
-    proj_yz = np.concatenate((proj_yz, np.array([[1,5,1]])), axis = 0)
-    prov_good = ransac(proj_xy, proj_yz, 10, 8, 0.001)
-    print(f"Prov good = {prov_good}")
->>>>>>> cad0cfa9ac766d70bb63c2ae6670c0ba78c610f8
 
 
 if __name__ == "__main__":
